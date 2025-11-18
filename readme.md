@@ -6,7 +6,7 @@
 4. Hit `"http://localhost:8090/location"`  with Put request to start location update.
 5. Watch cab-user: console for location updates comming from **cab-driver to - Kafka Broker - to cab-user.**
 
-<hr style="height: 1px; background-color: black;"> 
+<hr> 
 
 ## Dependency required for the project
 
@@ -24,19 +24,30 @@
 3. spring.kafka.producer.value-serializer=org.apache.kafka.common.serialization.StringSerializer [JSON etc]
 ```
 
+#### Other Imp for producer**
+```
+spring.kafka.producer.acks=all
+spring.kafka.producer.retries=3
+```
+
 <hr style="height: 1px; background-color: black;"> 
 
 # Required Kafka properties for consumer
 ```
-1. spring.kafka.consumer.bootstrap-servers=localhost:9092
-2. spring.kafka.consumer.key-serializer=org.apache.kafka.common.serialization.StringDeserializer
-3. spring.kafka.consumer.value-serializer=org.apache.kafka.common.serialization.StringDeserializer
-4. spring.kafka.consumer.group-id=user-group
+spring.kafka.consumer.bootstrap-servers=localhost:9092
+spring.kafka.consumer.key-deserializer=org.apache.kafka.common.serialization.StringDeserializer
+spring.kafka.consumer.value-deserializer=org.apache.kafka.common.serialization.StringDeserializer
+spring.kafka.consumer.group-id=user-group
+```
+Here `...key-deserializer` and `...value-deserializer`
+<hr/> 
+
+#### Other Imp for consumer**
+```
+spring.kafka.consumer.auto-offset-reset=earliest or latest
 ```
 
-<hr/>
-
-## Producer main Logic
+# Producer main Logic
 ```java
     @Service
     @RequiredArgsConstructor
@@ -54,7 +65,7 @@
 
 <hr style="height: 1px; background-color: black;"> 
 
-## Consumer main Logic 
+# Consumer main Logic 
 ```java
    @KafkaListener(topics = "cab-location", groupId = "user-group")
     public void cabLocation(String location){
@@ -89,8 +100,8 @@
 
 | Command | Purpose |
 | :--- | :--- |
-| `kafka-zookeeper-start.sh` | **Starts the ZooKeeper service** for Kafka coordination. |
-| `kafka-server-start.sh` | **Starts the Kafka broker** (server) instance. |
-| `kafka-topics.sh` | **Manages topics** (create, list, describe, delete, alter). |
-| `kafka-console-producer.sh` | Allows **sending messages** |
-| `kafka-console-consumer.sh` | Allows **reading messages** |
+| `zookeeper-server-start.bat` | **Starts the ZooKeeper service** for Kafka coordination. |
+| `kafka-server-start.bat` | **Starts the Kafka broker** (server) instance. |
+| `kafka-topics.bat` | **Manages topics** (create, list, describe, delete, alter). |
+| `kafka-console-producer.bat` | Allows **sending messages** |
+| `kafka-console-consumer.bat` | Allows **reading messages** |
