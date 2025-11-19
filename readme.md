@@ -79,7 +79,7 @@ spring.kafka.consumer.auto-offset-reset=earliest or latest
 
 ## Commands which I actually run
 1. Updated log paths in configs
-    - You edited config\zookeeper.properties and config\server.properties to point to your custom log directories.
+    - I edited config\zookeeper.properties and config\server.properties to point to your custom log directories.
 2. Started ZooKeeper
     - `.\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties`
     - ZooKeeper must start before Kafka.
@@ -105,3 +105,19 @@ spring.kafka.consumer.auto-offset-reset=earliest or latest
 | `kafka-topics.bat` | **Manages topics** (create, list, describe, delete, alter). |
 | `kafka-console-producer.bat` | Allows **sending messages** |
 | `kafka-console-consumer.bat` | Allows **reading messages** |
+
+<hr/>
+
+# Kafka Dictionary
+
+| Term | Term | Term | Term |
+|------|------|------|------|
+| Broker | Cluster | Topic | Partition |
+| Offset | Producer | Consumer | Consumer Group |
+| Zookeeper | KRaft | Record | Key |
+| Value | Serialization | Deserialization | Acknowledgment (acks) |
+| Replication Factor | Leader | Follower | Retention Period |
+| Lag | Dead Letter Queue (DLQ) | Schema Registry | Kafka Connect |
+| Kafka Streams | Controller | Compaction | Batch |
+| Poll | Rebalance | Idempotence | Exactly-Once Semantics (EOS) |
+
