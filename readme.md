@@ -1,3 +1,18 @@
+# Index
+
+- [How to Run](#how-to-run)
+- [Dependency Required](#dependency-required-for-the-project)
+- [Kafka Properties for Producer](#required-kafka-properties-for-producer)
+- [Kafka Properties for Consumer](#required-kafka-properties-for-consumer)
+- [Producer Main Logic](#producer-main-logic)
+- [Consumer Main Logic](#consumer-main-logic)
+- [Kafka CMD](#commands-which-i-actually-run)
+- [Kafka Dictionary](#kafka-dictionary)
+
+---
+
+
+
 # How to run ?
 
 1. Download Kafka 3.9.0 requires JAVA_HOME
