@@ -63,20 +63,37 @@ spring.kafka.consumer.auto-offset-reset=earliest or latest
 ```
 
 # Producer main Logic
-```java
-    @Service
-    @RequiredArgsConstructor
-    public class CabLocationService {
-        private final KafkaTemplate<String, Object> kafkaTemplate;
+- `This configuration creates a Kafka topic during application startup with the specified name, replicas, and partitions.`
+    ```java
+    @Configuration
+    public class KafkaConfig {
 
-        public void updateLocation(String location){
-            kafkaTemplate.send(AppConstant.CAB_LOCATION, location);
+        @Bean
+        public NewTopic topic(){
+            return TopicBuilder
+                    .name(AppConstant.CAB_LOCATION)
+                    .replicas(1)
+                    .partitions(1)
+                    .build();
         }
     }
-```
+    ```
 
-- Here kafkaTemplate.send(Topic, Data);
-- Needs DI of KafkaTemplate<String, Object> kafkaTemplate Bean;
+- `This service publishes the cab’s current location to the configured Kafka topic using KafkaTemplate.`
+    ```java
+        @Service
+        @RequiredArgsConstructor
+        public class CabLocationService {
+            private final KafkaTemplate<String, Object> kafkaTemplate;
+
+            public void updateLocation(String location){
+                kafkaTemplate.send(AppConstant.CAB_LOCATION, location);
+            }
+        }
+    ```
+
+    - Here kafkaTemplate.send(Topic, Data);
+    - Needs DI of KafkaTemplate<String, Object> kafkaTemplate Bean;
 
 <hr style="height: 1px; background-color: black;"> 
 
